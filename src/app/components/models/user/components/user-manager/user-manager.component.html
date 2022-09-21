@@ -1,0 +1,87 @@
+<div class="progress-content">
+    <mat-progress-bar [mode]="'indeterminate'" *ngIf="isLoadingResults"> </mat-progress-bar>
+</div>
+<app-breadcrumb [show]=true [bread]="bread"></app-breadcrumb>
+<div class="content margin_footer">
+    <mat-card class="mat-elevation-z2">
+        <mat-menu #contextMenu="matMenu">
+            <ng-template matMenuContent>
+
+                <button mat-menu-item [disabled]="!validateOid()" (click)="onSubmit()">
+                    <mat-icon>save_alt</mat-icon>
+                    <span>Guardar usuario</span>
+                </button>
+
+            </ng-template>
+        </mat-menu>
+
+        <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+            <mat-card-content>
+                <div class="row">
+                    <div class="col-12">
+                        <mat-form-field>
+                            <mat-label>
+                                Nombre
+                            </mat-label>
+                            <input matInput autocomplete="name" required maxlength="90" formControlName="name"
+                                type="text">
+                            <mat-error align="end" *ngIf="form.get('name')?.invalid">
+                                Debes ingresar un nombre</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-12">
+                        <mat-form-field>
+                            <mat-label>
+                                Usuario
+                            </mat-label>
+                            <input matInput autocomplete="username" required maxlength="90" formControlName="userName"
+                                type="text">
+                            <mat-error align="end" *ngIf="form.get('userName')?.invalid">
+                                Debes ingresar un nombre de usuario</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-12">
+                        <mat-form-field>
+                            <mat-label>
+                                Contraseña
+                            </mat-label>
+                            <input matInput autocomplete="password" required maxlength="90" formControlName="password"
+                                type="password">
+                            <mat-error align="end" *ngIf="form.get('password')?.invalid">
+                                Debes ingresar un nombre de usuario</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-12">
+                        <mat-form-field>
+                            <mat-label>
+                                Apellido
+                            </mat-label>
+                            <input matInput autocomplete="lastName" required maxlength="90" formControlName="lastName"
+                                type="text">
+                            <mat-error align="end" *ngIf="form.get('lastName')?.invalid">
+                                Debes ingresar un apellido</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-12">
+                        <mat-form-field>
+                            <mat-label>
+                                Segundo apellido
+                            </mat-label>
+                            <input matInput autocomplete="surName" maxlength="90" formControlName="surName" type="text">
+                        </mat-form-field>
+                    </div>                   
+
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button color="primary" type="submit" [disabled]="isLoadingResults">Guardar</button>
+                <button mat-button type="reset" (click)="clear()">Cancelar</button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
+</div>
